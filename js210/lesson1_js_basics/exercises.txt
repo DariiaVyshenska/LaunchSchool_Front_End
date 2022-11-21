@@ -1,0 +1,423 @@
+JS book
+Chapter "The Basics"
+
+1. 'Dariia'.concat(' ', 'Vyshenska')
+'Dariia' + ' ' + 'Vyshenska'
+
+2.
+> let num = 4936
+> dFour = num % 10
+> dThree = (num - dFour) / 10 % 10
+> dTwo = ((num - dFour) / 10 - dThree) / 10 % 10
+> dOne = ((((num - dFour) / 10 - dThree) / 10) - dTwo) / 10 % 10
+
+3.
+> typeof 'true'
+'string'
+
+> typeof false
+'boolean'
+
+> typeof 1.5
+'number'
+
+> typeof 2
+'number'
+
+> typeof undefined
+'undefined'
+
+> typeof {foo: 'bar'}
+'object'
+
+4.
+console.log('5' + 10); is a statement that prints out to the standard output
+the return value of the expression `'5' + 10`. Since the return value of the
+expression is a concatenated string '510' this is what we see on the display.
+Why do we observe string concatination in this case? because we use `+` expression with
+a string and a number. And in this case there is an implicit convertion of
+a number to a string with following string concatination.
+
+5.
+>  Number('5') + 10
+
+6.
+> console.log(`The value of 5 + 10 is ${Number('5') + 10}.`)
+The value of 5 + 10 is 15.
+
+7.
+the return value will be 'undefined'
+
+8.
+let names = ['Bobik', 'Barsyk', 'Hovrah']
+
+9.
+> let pets = {bobik: 'dog', barsyk: 'cat', hovrah: 'humster'}
+
+10.
+false
+
+11.
+3
+
+12.
+true
+
+Chapter "Variables"
+1.
+./exercises_answers/variables1.js
+
+2.
+./exercises_answers/variables2_age.js
+
+3.
+we'll get an error. because variables defined using 'let' keyword have a block
+scope. since we define the variable 'foo' inside of the block but try referencing
+it outside of that block we get an error because the variable can't be referenced
+outside of the block where it was defined.
+
+4.
+running the code we'll see three strings in the standard output and then an
+error when the program tries to execute line 6. We get an error because
+on line 6 we try re-assigning a value of previously defined constant and this
+is forbiden.
+
+5.
+we'll see 'bar' due to second 'foo' definition and initialization inside of
+the block shadowing the variable 'foo' defined and initialized on line 1.
+
+6.
+it will not produce an error since constants obey same scoping rules as
+variables. we'll see 'bar' in our standard output
+
+Chapter "Input/Output"
+1.
+./greeter.js
+
+2.
+./greeter.js
+
+Chapter "Functions"
+1.
+the code will log to the console '1'. The execution of the foo function will
+not affect the output (bar will still be equal to 1 in the global scope) because
+inside of the foo function on line 3 we initiate a new bar variable (the shadowing
+of the global scope bar variable), and not reassigning the value of the global scope
+bar variable.
+
+2.
+./greeter.js
+
+3.
+./multipl_fun.js
+
+4.
+the function will stup running once encounters 'return',
+return 'undefined'. From docs on 'return':
+If omitted, undefined is returned instead.
+Therefore, there will be nothing logged to the console.
+
+5.
+nothing, since we do not have any call to console.log at all.
+the function will return a new string of text that ends in '!!!!'
+
+Chapter 'Flow Control'
+1.
+false || (true && false); ==> false
+true || (1 + 2); ==> true
+(1 + 2) || true; ==> 3
+true && (1 + 2); ==> 3
+false && (1 + 2); ==> false
+(1 + 2) && true; ==> true
+(32 * 4) >= 129; ==> false
+false !== !true; ==> false
+true === 4; ==> false
+false === (847 === '847'); ==> true
+false === (847 == '847'); ==> false
+(!true || (!(100 / 5) === 20) || ((328 / 4) === 82)) || false; ==> true
+
+2-3.
+function evenOrOdd(num) {
+  if (!Number.isInteger(num)) {
+    console.log('Error! The input is not an integer.')
+  } else {
+    console.log( (num % 2) ? 'odd':'even' )
+  }
+}
+
+evenOrOdd(2)
+evenOrOdd(3)
+evenOrOdd(1.2)
+evenOrOdd('a')
+
+4.
+it will log all strings to the console because the case clauses of the switch
+statement do not contain 'break' statements so the code will fall through all the cases.
+
+5.
+if (foo()) {
+  return 'bar'
+} else {
+  return qux()
+}
+
+6.
+it will return 'not empty' because empty arrays are not falsy
+
+7.
+function longStrToUpper(str) {
+  if(str.length > 10) {
+    return str.toUpperCase()
+  } else {
+    return str
+  }
+}
+
+8.
+function numberRange(num) {
+  if(num < 0) {
+    console.log(`${num} is less than 0`)
+  } else if((num >= 0) && (num <= 50)){
+    console.log(`${num} is between 0 and 50`)
+  }else if((num > 50) && (num <= 100)) {
+    console.log(`${num} is between 51 and 100`)
+  } else if(num > 100) {
+    console.log(`${num} is greater than 100`)
+  }
+}
+
+Chapter "Loops, iteration"
+1.
+./age.js
+
+2.
+function computeFactorial(num) {
+  let factorial = 1;
+  for(let i = 2; i <= num; ++i) {
+    factorial *= i;
+  }
+  return factorial;
+}
+
+3.
+there is a bug on line 3: 'while (counter = 1) {'
+the condition is always true because instead of strict equality sign (===) we
+have here an assignment of 1 to variable counter that always returns truthy
+value and cases infinite looping.
+
+4.
+the loop will output 1 2 3 4 5 to the console and stop. We moved the interation
+for the counter to the inside of the loop, but since it's within loops scope
+the changes to the counter value will be seen on evaluation of the loop condition.
+
+5.
+let tries = 0;
+let result = randomNumberBetween(1, 6);
+for (tries = 1; result <= 2; ++tries) {
+  result = randomNumberBetween(1, 6);
+}
+console.log(`It took ${tries} tries to get a number greater than 2`);
+
+6.
+function factorial(num){
+  if(num === 1) return 1;
+
+  return num * factorial(num - 1);
+}
+
+Chapter "Arrays"
+1.
+array1 -> 4
+array2 -> 5
+array3 -> 0
+array4 -> 3
+array5 -> 101
+
+2.
+myArray.forEach(function(i) {
+  if (i % 2 === 0) console.log(i);
+})
+
+3.
+myArray.forEach(function(innArr) {
+  innArr.forEach(function(i) {
+    if (i %2 === 0) console.log(i);
+  })
+})
+
+4.
+let newArr = myArray.map(function(i) {
+               return (i % 2 === 0) ? 'even' : 'odd'
+             });
+
+5.
+function findIntegers(arr) {
+  return arr.filter(i => Number.isInteger(i));
+}
+
+6.
+function oddLengths(arr) {
+  let arrLengths = arr.map(x => x.length);
+  return arrLengths.filter(x => x % 2 !== 0)
+}
+
+7.
+function sumOfSquares(arr) {
+  return arr.reduce((acc, el) => acc + el**2, 0)
+}
+
+8.
+function oddLengths(arr) {
+  return arr.reduce((acc, el) => {
+    let l = el.length;
+    if(l % 2 !== 0) {
+      acc.push(l);
+    }
+    return acc;
+  }, []);
+}
+
+9.
+function checkThree(arr) {
+  reduceResult = arr.reduce((acc, el) => {
+    if(el === 3) {
+      acc.push(el);
+    }
+    return acc;
+  }, [])
+  return reduceResult.length === 1;
+}
+
+OR using existing function:
+arr.includes(3);
+
+10.
+arr[1][3] = 606
+
+Chapter "Objects"
+1.
+person.name
+OR
+person['name']
+
+2.
+1 - valid
+'1'- valid
+undefined - valid
+'hello world' - valid
+true - valid
+'true' - valid
+
+3.
+let myArray = {
+  0: 'my',
+  1: 'name',
+  2: 'is',
+  length: 3
+};
+
+4.
+let keysCaps = Object.keys(obj).map(x => x.toUpperCase())
+
+5.
+let myObj = Object.create(myProtoObj);
+
+6.
+"foo" - primitive value
+3.1415 - primitive value
+[ 'a', 'b', 'c' ] - object
+false - primitive value
+foo - neither (it's an identifier)
+function bar() { return "bar"; } - object
+undefined - primitive value
+{ a: 1, b: 2 } - object
+
+7.
+first snippet will log to the console only 'qux' because Object.keys does
+not have access to parent properties;
+second snippet will log to the console both child and parent properties.
+
+8.
+function copyObj(obj, keys = undefined) {
+  let newObj = {};
+  if(!keys) keys = Object.keys(obj);
+
+  for(let k in keys) {
+    theKey = keys[k];
+    newObj[theKey] = obj[theKey];
+  }
+  return newObj;
+}
+
+9.
+hi
+hello
+because in the first case we will mutate the object (we reassing one of its properties
+to a new value) and the second line is a reassignment of the argument2 variable
+but not the global scope qux variable (so qux will point to the same value
+as it was assigned to) - qux points to immutable (primitive) value.
+
+10.
+primitive values (6):
+1, 2, 'a', 'b', false, null
+objects(4):
+[1, 2, ["a", ["b", false]], null, {}]
+["a", ["b", false]]
+["b", false]
+{}
+
+11.
+obj['bar'][3]['xyz'] = 606
+
+Chapter "More Stuff"
+1.
+1 4 3
+on line 1 we declare a variable array1 and initialize it to an array (mutable object).
+on line 2 we declare a variable array2 and initialize it to reference same array
+as array1 variable.
+on line 3 we mutate the array that is referenced by both variables. we do not
+reassingn neither array1 nor array2. we reassign one of the elements of the object
+to the new primitive value (which for array object itself is a process of mutation)
+
+2.
+the stack trace indicates that on line 4 we call console.log method and pass it
+`greeting` as an argument. however, `greeting` does not exist in the scope of
+that function call.
+
+3.
+> Math.sqrt(37)
+6.082762530298219
+
+4.
+Math.max(1, 6, 3, 2)
+etc.
+
+5.
+1. splits string by space character and returns the elements as an array,
+reverses the order of elements in the array, using the last array it creates
+and retruns a new array that for each element of the input array creates an
+element in the output array that (element) contains an integer value
+representing the length of that element.
+In simplified words, this function splits a string with a sentence into words
+and returns an array containing the size of each word (reversed order to initial one)
+
+6.
+function allMatches(word_arr, reg) {
+  return word_arr.filter(x => reg.test(x))
+}
+
+7.
+Exceptions when thrown disrupt the work of the program (the error is thrown
+and the program stops unexpetedly). to prevent this unexpeted stop of the
+program work in some cases we want to handle particular type of exeptions so
+that the program continues to run and reacts to the Exception in a pre defined
+by the programmer way.
+we handle exceptions using statements try/catch/final
+
+8.
+function isNotANumber(value) {return value.toString() === 'NaN'}
+
+9.
+function isNegZero(val) {
+  return (1 / val) === -Infinity;
+}
